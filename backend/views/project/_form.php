@@ -17,7 +17,7 @@ use backend\models\Instructor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ins_ID')->dropDownList(Instructor::getInstructor()) ?>
+    <?= $form->field($model, 'ins_ID')->dropDownList(Instructor::getInstructorList()) ?>
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 

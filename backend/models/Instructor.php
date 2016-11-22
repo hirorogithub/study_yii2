@@ -3,7 +3,7 @@
 namespace backend\models;
 
 use Yii;
-
+use backend\models\Project;
 /**
  * This is the model class for table "instructor".
  *
@@ -52,7 +52,7 @@ class Instructor extends \yii\db\ActiveRecord
     {
         return [
             'ins_ID' => 'Ins  ID',
-            'name' => '姓名',
+            'name' => '导师姓名',
             'sex' => '性别',
             'degree' => '职称',
             'researchDirection' => '研究方向',
@@ -62,7 +62,7 @@ class Instructor extends \yii\db\ActiveRecord
         ];
     }
     
-    public static function getInstructor()
+    public static function getInstructorList()
     {
         $data=Instructor::findBySql("SELECT `ins_ID`,`name`from `instructor`")->all();
         $d=array();
@@ -70,5 +70,10 @@ class Instructor extends \yii\db\ActiveRecord
             $d[$keys['ins_ID']]=$keys['name'];
         }
         return $d;
+    }
+   
+    public function getOrder()
+    {
+        return $this->hasMany(Project::classname(),['ins_ID'=>'ins_ID']);
     }
 }

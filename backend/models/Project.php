@@ -3,7 +3,7 @@
 namespace backend\models;
 
 use Yii;
-
+use backend\models\Instructor;
 /**
  * This is the model class for table "project".
  *
@@ -58,5 +58,10 @@ class Project extends \yii\db\ActiveRecord
             'phone' => '联系电话',
             'dept_name' => '所属系别',
         ];
+    }
+    
+    public function getInstructor()
+    {
+        return $this->hasOne(Instructor::className(),['ins_ID'=>'ins_ID']);
     }
 }

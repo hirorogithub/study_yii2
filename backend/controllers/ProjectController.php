@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\SqlDataProvider;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -37,7 +38,15 @@ class ProjectController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProjectSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model=new Project();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->find()->with('instructor'),
+            'pagination' => [
+                'pageSize' => 20,
+            ]
+        ]);
+        
         //var_dump(Yii::$app->request->queryParams) ;
         //var_dump($dataProvider);
         //var_dump($searchModel);
@@ -134,5 +143,14 @@ class ProjectController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionTest(){
+        $datas=Project::find()->all();
+        foreach($datas as $model){
+            echo $model->title;
+            var_dump( $model->instructor);
+        }
+        
     }
 }

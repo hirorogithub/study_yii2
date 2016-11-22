@@ -33,7 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'ins_ID',
             'type',
             'level',
-            'apply_time',          
+            'apply_time',  
+            'instructor.name',    
+            'instructor.sex',    
+            'instructor.degree',
+            'instructor.researchDirection',
+            'instructor.email',
+            'instructor.phone',
+            'instructor.dept_name',
         ],
     ]) ?>
 
