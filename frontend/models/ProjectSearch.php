@@ -18,7 +18,7 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['pro_ID', 'ins_ID', 'level'], 'integer'],
+            [['pro_ID', 'ins_ID', 'level','has_viewed'], 'integer'],
             [['title', 'type', 'apply_time'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class ProjectSearch extends Project
             'ins_ID' => $this->ins_ID,
             'level' => $this->level,
             'apply_time' => $this->apply_time,
+            'has_viewed' => $this->has_viewed,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -30,8 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'type',
             'level',
             'apply_time',
-
-            ['class' => 'yii\grid\ActionColumn'],
+         
         ],
     ]); ?>
 </div>

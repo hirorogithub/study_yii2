@@ -4,10 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Project;
+use frontend\models\User;
 use frontend\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -51,61 +53,42 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render('_dview', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    /**
-     * Creates a new Project model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
+    
+    public function actionTest()
     {
-        $model = new Project();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pro_ID]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        $query= Project::find()->with('instructor');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 2,
+            ],
+        ]);
+        return $this->render('_test', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
-
-    /**
-     * Updates an existing Project model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
+    
+    
+    public function actionSend()
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->pro_ID]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+        $project=Project::findOne(1);
+        $student=User::findOne(1);
+        return Yii::$app
+        ->mailer
+        ->compose('resume_send',[
+            'student'=>$student,
+            'project'=>$project,
+        ])
+        ->setFrom([Yii::$app->params['supportEmail'] => '申报系统邮件机器人'])
+        ->setTo('2211637298@qq.com')
+        ->setSubject('简历信息')
+        ->send();
     }
-
-    /**
-     * Deletes an existing Project model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
     /**
      * Finds the Project model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
