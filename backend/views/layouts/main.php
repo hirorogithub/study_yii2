@@ -37,7 +37,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => '管理导师名单', 'url' => ['/instructor/index']],
         ['label' => '管理项目', 'url' => ['/project/index']],
-        ['label' => '查看简历(TODO)', 'url' => ['/site/index']],
+        ['label' => '投递记录', 'url' => ['/resume/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];

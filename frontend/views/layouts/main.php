@@ -36,14 +36,15 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => '主页', 'url' => ['/site/index']],
-        
-        
+        ['label'=>'项目一览','url'=>['/project/index']]
+                
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
         $menuItems[] =['label' => '个人信息', 'url' => ['/user/view']];
+        $menuItems[] =['label' => '投递记录', 'url' => ['/resume/view']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

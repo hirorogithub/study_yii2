@@ -21,8 +21,8 @@ use yii\widgets\DetailView;
         <?= DetailView::widget([
         'model' => $student,
         'attributes' => [
-            'student_ID',
             'username',
+            'student_name',
             'email',
             'grade',      
             'subject',

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 /**
  * InstructorController implements the CRUD actions for Instructor model.
  */
@@ -20,6 +21,16 @@ class InstructorController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -121,7 +132,7 @@ class InstructorController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+    /*
     public function actionTest()
     {
         $data=Instructor::findBySql("SELECT `ins_ID`,`name`from `instructor`")->all();
@@ -130,5 +141,5 @@ class InstructorController extends Controller
             $d[$keys['name']]=$keys['ins_ID'];
         }
         print_r ($d);
-    }
+    }*/
 }

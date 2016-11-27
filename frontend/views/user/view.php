@@ -5,7 +5,6 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\User */
-
 $this->title = $model->username;
 $this->params['breadcrumbs'][] = '个人信息';
 ?>
@@ -21,9 +20,9 @@ $this->params['breadcrumbs'][] = '个人信息';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
-            'student_ID',
+            //'id', 
             'username',
+            'student_name',
             //'auth_key',
             //'password_hash',
             //'password_reset_token',

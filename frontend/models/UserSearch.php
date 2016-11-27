@@ -19,7 +19,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'created_at', 'updated_at', 'phone', 'have_Init'], 'integer'],
-            [['student_ID', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'grade', 'subject', 'GPA_discribe', 'self_discribe'], 'safe'],
+            [['student_name', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'grade', 'subject', 'GPA_discribe', 'self_discribe'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class UserSearch extends User
             'have_Init' => $this->have_Init,
         ]);
 
-        $query->andFilterWhere(['like', 'student_ID', $this->student_ID])
+        $query->andFilterWhere(['like', 'student_name', $this->student_name])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])

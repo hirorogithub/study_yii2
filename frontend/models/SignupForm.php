@@ -63,7 +63,7 @@ class SignupForm extends Model
     {
         return [
            
-            'username' => '用户名',
+            'username' => '学号',
             
             'password' => '密码',
             

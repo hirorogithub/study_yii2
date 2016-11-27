@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\SqlDataProvider;
 use yii\data\ActiveDataProvider;
-
+use yii\filters\AccessControl;
 /**
  * ProjectController implements the CRUD actions for Project model.
  */
@@ -22,6 +22,16 @@ class ProjectController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -144,7 +154,7 @@ class ProjectController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+    /*
     public function actionTest(){
         $datas=Project::find()->all();
         foreach($datas as $model){
@@ -152,5 +162,5 @@ class ProjectController extends Controller
             var_dump( $model->instructor);
         }
         
-    }
+    }*/
 }

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use frontend\models\User;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\User */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,15 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'student_ID')->textInput(['maxlength' => true])->hint('*重要信息，请准确填写') ?>
-    
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true])->hint('*重要信息，请准确填写') ?>
+    <?= $form->field($model, 'student_name')->textInput(['maxlength' => true])->hint('*重要信息，请准确填写') ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true])->hint('*重要信息，请准确填写') ?>
     
     <?= $form->field($model, 'phone')->textInput()->hint('*重要信息，请准确填写') ?>
 
-    <?= $form->field($model, 'grade')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'grade')->dropDownList(User::getGradeList()) ?>
 
     <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
    

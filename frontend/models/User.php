@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $username
+ * @property string $student_name
  * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
@@ -40,11 +41,11 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at', 'grade', 'subject', 'phone', 'GPA_discribe', 'self_discribe', 'have_Init'], 'required'],
-            [['student_ID','status', 'created_at', 'updated_at', 'phone'], 'integer'],
+            [['status', 'created_at', 'updated_at', 'phone'], 'integer'],
             [['grade'], 'safe'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
-            [['subject'], 'string', 'max' => 16],
+            [['subject','student_name'], 'string', 'max' => 16],
             [['GPA_discribe'], 'string', 'max' => 256],
             [['self_discribe'], 'string', 'max' => 512],
             [['username'], 'unique'],
@@ -61,8 +62,8 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => '姓名',
-            'student_ID'=>'学号',
+            'username' => '学号',
+            'student_name'=>'姓名',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
             'password_reset_token' => 'Password Reset Token',
@@ -85,5 +86,14 @@ class User extends \yii\db\ActiveRecord
             $this->have_Init=1;
         }
         return true;
+    }
+    
+    public static function getGradeList(){
+        $year=date('Y');
+        $result=array();
+        for($i=4;$i>=0;$i--){
+             $result[$year-$i]=strval($year-$i);
+        }
+        return $result;
     }
 }

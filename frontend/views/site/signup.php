@@ -19,9 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->hint('*一旦申请不可修改') ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->hint('*用于联系导师以及找回密码') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
@@ -31,5 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
         </div>
+    </div>
+    
+    <div class="row">
+        
     </div>
 </div>
